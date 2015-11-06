@@ -28,7 +28,7 @@ then
   tar -xvf $tarfile
 
   cd ncbi-blast-${VERSION}+-src/c++
-  ../configure --prefix=$INSTALL_PREFIX
+  ./configure --prefix=$INSTALL_PREFIX
   make 2>&1 | tee make.log
   make install
 
