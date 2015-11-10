@@ -20,7 +20,7 @@ mkdir $TIME_STAMP-$PYTHON_VERSION
 cd $TIME_STAMP-$PYTHON_VERSION
 
 
-virtualenv --system-site-packages venv
+virtualenv venv
 
 source venv/bin/activate
 

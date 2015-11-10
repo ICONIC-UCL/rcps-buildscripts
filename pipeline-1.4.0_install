@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+###########
+# Installing pipeline scripts
+#
+#
+# by Tiziano Gallo Cassarino, 2015
+#
+#
+
+NAME=${NAME:-pipeline}
+VERSION=${VERSION:-1.4.0}
+INSTALL_PREFIX=${INSTALL_PREFIX:-/shared/ucl/apps/$NAME/$VERSION}
+SRC_ARCHIVE=${SRC_ARCHIVE:-git@github.com:ICONIC-UCL/pipeline.git}
+
+set -e
+
+archive=$(basename "${SRC_ARCHIVE}")
+
+if [[ -e $INSTALL_PREFIX ]]; then
+  rm -rf $INSTALL_PREFIX
+fi
+
+mkdir -p $INSTALL_PREFIX
+cd $INSTALL_PREFIX
+
+git clone $SRC_ARCHIVE
+
+chmod a+x $INSTALL_PREFIX/${NAME}/${NAME}/*.py
+chmod a+x $INSTALL_PREFIX/${NAME}/${NAME}/*.pl
