@@ -9,7 +9,7 @@
 NAME=${NAME:-lastz}
 VERSION=${VERSION:-1.03.73}
 INSTALL_PREFIX=${INSTALL_PREFIX:-/shared/ucl/apps/$NAME/$VERSION/$COMPILER_TAG}
-#MD5=${MD5:-988ec4c3058a6ceda36503eebecd4122}
+MD5=${MD5:-4796101073480233194cbcba2994e192}
 SRC_ARCHIVE=${SRC_ARCHIVE:-http://www.bx.psu.edu/~rsharris/lastz/newer/${NAME}-${VERSION}.tar.gz}
 
 set -e
@@ -21,18 +21,19 @@ cd $temp_dir
 wget $SRC_ARCHIVE
 archive=$(basename "${SRC_ARCHIVE}")
 
-#CHECKSUM=`md5sum $archive| awk '{print $1}'`
+CHECKSUM=`md5sum $archive| awk '{print $1}'`
 
-#if [ "$MD5" == "$CHECKSUM" ]
-#then
+if [ "$MD5" == "$CHECKSUM" ]
+then
   tar -xvf $archive
 
   cd ${NAME}-distrib-${VERSION}
   BIN_PREFIX=$INSTALL_PREFIX/bin
   make install LASTZ_INSTALL=$BIN_PREFIX 2>&1 | tee make.log
 
-#else
-#  echo "Hash mismatch."
-#  echo "Expected: $MD5"
-#  echo "Got: $CHECKSUM"
-#fi
+else
+  echo "Hash mismatch."
+  echo "Expected: $MD5"
+  echo "Got: $CHECKSUM"
+fi
+

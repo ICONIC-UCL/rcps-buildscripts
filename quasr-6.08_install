@@ -9,7 +9,7 @@
 NAME=${NAME:-QUASR}
 VERSION=${VERSION:-6.08}
 INSTALL_PREFIX=${INSTALL_PREFIX:-/shared/ucl/apps/$NAME/$VERSION}
-#MD5=${MD5:-924fc8eb38fdff71740a0e05d32d6a2b}
+MD5=${MD5:-ca0be9d80341b324e2eeab916bb1f8bf}
 SRC_ARCHIVE=${SRC_ARCHIVE:-http://downloads.sourceforge.net/project/quasr/${NAME}_v${VERSION}.tar}
 
 set -e
@@ -21,10 +21,10 @@ cd $temp_dir
 wget $SRC_ARCHIVE
 archive=$(basename "${SRC_ARCHIVE}")
 
-#CHECKSUM=`md5sum $archive| awk '{print $1}'`
+CHECKSUM=`md5sum $archive| awk '{print $1}'`
 
-#if [ "$MD5" == "$CHECKSUM" ]
-#then
+if [ "$MD5" == "$CHECKSUM" ]
+then
 
   mkdir -p $INSTALL_PREFIX
   tar -xvf $archive
@@ -38,8 +38,9 @@ archive=$(basename "${SRC_ARCHIVE}")
   sed -i 's:'"'"'/nfs/users/nfs_s/sw10/QUASR6/modules/'"'"':os.path.dirname(os.path.realpath(__file__))+"/modules/":' $INSTALL_PREFIX/readset_parser.py
 
 
-#else
-#  echo "Hash mismatch."
-#  echo "Expected: $MD5"
-#  echo "Got: $CHECKSUM"
-#fi
+else
+  echo "Hash mismatch."
+  echo "Expected: $MD5"
+  echo "Got: $CHECKSUM"
+fi
+
