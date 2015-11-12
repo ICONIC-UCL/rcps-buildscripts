@@ -9,7 +9,7 @@
 NAME=${NAME:-fastqc}
 VERSION=${VERSION:-0.11.4}
 INSTALL_PREFIX=${INSTALL_PREFIX:-/shared/ucl/apps/$NAME/$VERSION}
-#MD5=${MD5:-924fc8eb38fdff71740a0e05d32d6a2b}
+MD5=${MD5:-104ff2e0e9aebf5bee1f6b068a059b0d}
 SRC_ARCHIVE=${SRC_ARCHIVE:-http://www.bioinformatics.babraham.ac.uk/projects/${NAME}/${NAME}_v${VERSION}.zip}
 
 set -e
@@ -21,10 +21,10 @@ cd $temp_dir
 wget $SRC_ARCHIVE
 archive=$(basename "${SRC_ARCHIVE}")
 
-#CHECKSUM=`md5sum $archive| awk '{print $1}'`
+CHECKSUM=`md5sum $archive| awk '{print $1}'`
 
-#if [ "$MD5" == "$CHECKSUM" ]
-#then
+if [ "$MD5" == "$CHECKSUM" ]
+then
 
   mkdir -p $INSTALL_PREFIX
   unzip $archive
@@ -32,8 +32,9 @@ archive=$(basename "${SRC_ARCHIVE}")
   
   chmod a+x $INSTALL_PREFIX/fastqc
 
-#else
-#  echo "Hash mismatch."
-#  echo "Expected: $MD5"
-#  echo "Got: $CHECKSUM"
-#fi
+else
+  echo "Hash mismatch."
+  echo "Expected: $MD5"
+  echo "Got: $CHECKSUM"
+fi
+
