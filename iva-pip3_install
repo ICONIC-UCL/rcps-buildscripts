@@ -20,6 +20,7 @@ require kmc
 require mummer
 require trimmomatic
 require samtools/1.2
+require bambamc
 require smalt
 
 pip3 install --install-option="--prefix=$INSTALL_PREFIX" iva==$VERSION
