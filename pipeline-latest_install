@@ -11,7 +11,8 @@
 NAME=${NAME:-pipeline}
 VERSION=${VERSION:-1.4.0}
 INSTALL_PREFIX=${INSTALL_PREFIX:-/shared/ucl/apps/$NAME/$VERSION}
-SRC_ARCHIVE=${SRC_ARCHIVE:-git@github.com:ICONIC-UCL/pipeline.git}
+SRC_ARCHIVE=${SRC_ARCHIVE:-https://github.com/ICONIC-UCL/pipeline.git}
+MD5=${MD5:-}
 
 set -e
 
