@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+###############################################
+# Installing CESM
+#
+# by Owain Kenway, 2015 
+#
+
+# You need to register for CESM and check out the appropriate version from
+# their password protected SVN.  I then tar them up and put them on the NFS
+# share so that I can re-install from a known good tarball.
+
+VERSION=${VERSION:-1_2_2}
+INSTALL_PREFIX=${INSTALL_PREFIX:-/shared/ucl/apps/cesm}
+SRC_ARCHIVE=${SRC_ARCHIVE:-/shared/ucl/apps/cesm/cesm${VERSION}.tar.gz}
+
+set -e
+
+mkdir -p $INSTALL_PREFIX
+cd $INSTALL_PREFIX
+
+tar zxvf $SRC_ARCHIVE
+cd cesm${VERSION}/scripts
+cp /shared/ucl/apps/build_scripts/cesm-patches/legion_cesm_setup.sh .
+cd ccsm_utils/Machines
+cp /shared/ucl/apps/build_scripts/cesm-patches/*.legion* .
+cp /shared/ucl/apps/build_scripts/cesm-patches/Depends.intel .
+mv mkbatch.legion.${VERSION%_*} mkbatch.legion
+cp /shared/ucl/apps/build_scripts/cesm-patches/config_machines.xml.${VERSION%_*}.patch .
+patch < config_machines.xml.${VERSION%_*}.patch 
+
+mkdir -p $INSTALL_PREFIX/support
+cp /shared/ucl/apps/build_scripts/cesm-patches/modules.csh ${INSTALL_PREFIX}/support/modules.csh
+
+# Version 1.2 specific fixes
+if [ "${VERSION%_*}" == "1_2" ]
+then
+  cd $INSTALL_PREFIX/cesm${VERSION}/scripts/ccsm_utils/Machines
+  cp /shared/ucl/apps/build_scripts/cesm-patches/config_compilers.xml.1_2.patch .
+  patch < config_compilers.xml.1_2.patch
+
+  cp ${INSTALL_PREFIX}/cesm${VERSION}/scripts/ccsm_utils/Machines/taskmaker.pl ${INSTALL_PREFIX}/cesm${VERSION}/scripts/ccsm_utils/Tools
+  chmod +x ${INSTALL_PREFIX}/cesm${VERSION}/scripts/ccsm_utils/Tools/*
+
+  cd ${INSTALL_PREFIX}/cesm${VERSION}/tools/cprnc
+  cp /shared/ucl/apps/build_scripts/cesm-patches/cpnrcMakefile.1_2.patch .
+  patch < cpnrcMakefile.1_2.patch
+  set +e
+  make
+  set -e
+  make
+fi
+
+# uncomment when groups set on build system
+cd $INSTALL_PREFIX
+chgrp -R legcesm cesm${VERSION}
+chmod -R o-rwx cesm${VERSION}
