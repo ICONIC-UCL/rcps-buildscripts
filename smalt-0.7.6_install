@@ -17,7 +17,7 @@ set -e
 
 temp_dir=`mktemp -d -p /dev/shm`
 
-cd $temp_dir
+pushd $temp_dir
 
 wget $SRC_ARCHIVE
 archive=$(basename "${SRC_ARCHIVE}")
@@ -39,3 +39,8 @@ else
   echo "Expected: $MD5"
   echo "Got: $CHECKSUM"
 fi
+
+popd
+
+rm -rf $temp_dir
+

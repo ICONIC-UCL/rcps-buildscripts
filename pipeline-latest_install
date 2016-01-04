@@ -9,10 +9,10 @@
 #
 
 NAME=${NAME:-pipeline}
-VERSION=${VERSION:-1.4.0}
+VERSION=${VERSION:-latest}
 INSTALL_PREFIX=${INSTALL_PREFIX:-/shared/ucl/apps/$NAME/$VERSION}
 SRC_ARCHIVE=${SRC_ARCHIVE:-https://github.com/ICONIC-UCL/pipeline.git}
-MD5=${MD5:-}
+#MD5=${MD5:-}
 
 set -e
 
@@ -29,3 +29,4 @@ git clone $SRC_ARCHIVE
 
 chmod a+x $INSTALL_PREFIX/${NAME}/${NAME}/*.py
 chmod a+x $INSTALL_PREFIX/${NAME}/${NAME}/*.pl
+

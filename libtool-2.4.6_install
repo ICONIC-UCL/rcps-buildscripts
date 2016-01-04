@@ -16,7 +16,7 @@ export PATH=$INSTALL_PREFIX/bin:$PATH
 
 temp_dir=`mktemp -d`
 
-cd $temp_dir
+pushd $temp_dir
 
 wget \
   http://ftp.heanet.ie/mirrors/gnu/libtool/libtool-${VERSION}.tar.xz
@@ -28,4 +28,8 @@ cd libtool-${VERSION}
 make -l 12 -j && make check 
 
 make install
+
+popd
+
+rm -rf $temp_dir
 

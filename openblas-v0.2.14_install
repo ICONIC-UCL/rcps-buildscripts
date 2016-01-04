@@ -15,10 +15,11 @@ SRC_ARCHIVE=${SRC_ARCHIVE:-https://github.com/xianyi/OpenBLAS/archive/v${VERSION
 set -e
 
 export PATH=$INSTALL_PREFIX/bin:$PATH
+export LD_LIBRARY_PATH=$INSTALL_PREFIX/lib:$LD_LIBRARY_PATH
 
 temp_dir=`mktemp -d`
 
-cd $temp_dir
+pushd $temp_dir
 
 wget $SRC_ARCHIVE
 
@@ -36,3 +37,8 @@ else
   echo "Expected: $MD5"
   echo "Got: $CHECKSUM"
 fi
+
+popd
+
+rm -rf $temp_dir
+
