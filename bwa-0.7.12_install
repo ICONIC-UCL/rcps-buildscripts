@@ -35,7 +35,7 @@ then
   cd $INSTALL_PREFIX
   unzip $temp_dir/$archive
   mv ${NAME}-${VERSION}/* .
-  rm -r ${NAME}-${VERSION}
+  rm -rf ${NAME}-${VERSION}
   make
 
 else
