@@ -26,7 +26,7 @@ if [[ "$MD5" == "$CHECKSUM" ]]
 then
    tar xvzf texinfo-${VERSION}.tar.gz
    cd texinfo-${VERSION}
-   ./configure --prefix=${INSTALL_PREFIX}
+   sh ./configure --prefix=${INSTALL_PREFIX}
    make
    make check
    make install

@@ -40,7 +40,7 @@ _setup_files() {
 _build() {
   cd $BUILD_DIR
   cd ${BASENAME}
-  ./configure --prefix=$INSTALL_PREFIX --disable-werror
+  sh ./configure --prefix=$INSTALL_PREFIX --disable-werror
   # I found Werror (which is enabled by default) was making it stop on
   #  a warning that a macro was declared but not used, which really
   #  doesn't seem like a problem.

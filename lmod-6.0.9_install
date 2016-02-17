@@ -42,7 +42,7 @@ make PLAT=linux INSTALL_TOP="$INSTALL_PREFIX" linux install
 cd ..
 
 cd luarocks-${LUAROCKS_VERSION}
-./configure --prefix=$INSTALL_PREFIX --with-lua=$INSTALL_PREFIX --versioned-rocks-dir 
+sh ./configure --prefix=$INSTALL_PREFIX --with-lua=$INSTALL_PREFIX --versioned-rocks-dir 
 make build install
 cd ..
 
@@ -50,7 +50,7 @@ $INSTALL_PREFIX/bin/luarocks install luaposix
 $INSTALL_PREFIX/bin/luarocks install luafilesystem
 
 cd Lmod-${PACKAGE_VERSION}
-./configure \
+sh ./configure \
   --prefix=${INSTALL_PREFIX} \
   --with-spiderCacheDir=${INSTALL_PREFIX}/spidercache \
   --with-updateSystemFn=${INSTALL_PREFIX}/spidercache.updb.txt \

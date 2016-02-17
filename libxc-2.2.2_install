@@ -32,7 +32,7 @@ _setup_files() {
 
 _build() {
   cd ${basename}
-  ./configure --prefix=$install_prefix --enable-shared ${1:-}
+  sh ./configure --prefix=$install_prefix --enable-shared ${1:-}
   make ${2:-}
   make check || \
     echo "Sadly for libxc not all tests are expected (by the docs) to pass, "\

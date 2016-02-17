@@ -39,7 +39,7 @@ _file_setup() {
 
 _build_ffi() {
   cd libffi-${FFI_VERSION}
-  ./configure --prefix=$INSTALL_PREFIX --with-pic 
+  sh ./configure --prefix=$INSTALL_PREFIX --with-pic 
   # ^-- If you don't have with-pic, ruby compilation fails. 
   # See: http://stackoverflow.com/questions/27881263/ruby-2-2-0-fails-to-build-on-ubuntu-14-04-1-lts
   make -l 12 -j && make install
@@ -48,12 +48,12 @@ _build_ffi() {
 
 _build_ruby() {
   cd ruby-${RUBY_VERSION}
-  #./configure --prefix=$INSTALL_PREFIX --disable-rubygems
+  #sh ./configure --prefix=$INSTALL_PREFIX --disable-rubygems
   # I tried disabling ruby gems install here, because a bug in 2.4.<6 means that installing fails on NFS.
   # It didn't seem effective, though. So, let's try gutting out the included rubygems version and replacing it.
   rm -Rf ./lib/rubygems*
   mv ../rubygems-${RUBY_GEMS_VERSION}/lib/rubygems* ./lib
-  ./configure --prefix=$INSTALL_PREFIX
+  sh ./configure --prefix=$INSTALL_PREFIX
   make -l 12 -j && make install
   cd ..
 }

@@ -28,7 +28,7 @@ if [[ "$MD5" == "$CHECKSUM" ]]
 then
    tar xvzf ghostscript-${VERSION}.tar.gz
    cd ghostscript-${VERSION}
-   ./configure --prefix=${INSTALL_PREFIX} --enable-dynamic
+   sh ./configure --prefix=${INSTALL_PREFIX} --enable-dynamic
    make
    make install
    make so

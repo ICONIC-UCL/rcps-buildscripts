@@ -55,7 +55,7 @@ if [[ "$MD5" == "$CHECKSUM" ]]
 then
    tar xvzf R-${VERSION}.tar.gz
    cd R-${VERSION}
-   ./configure -C --prefix=${INSTALL_PREFIX} --with-recommended-packages --with-x \
+   sh ./configure -C --prefix=${INSTALL_PREFIX} --with-recommended-packages --with-x \
       --with-readline=yes --enable-R-shlib \
       --with-blas="-L/shared/ucl/apps/atlas/3.10.2/gnu-4.9.2/lib -lptf77blas -lpthread -latlas" 2>&1 | 
    tee configure-command-ATLAS_log

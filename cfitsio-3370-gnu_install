@@ -35,7 +35,7 @@ _setup_files() {
 
 _build() {
   cd ${basename}
-  ./configure --prefix=$install_prefix 
+  sh ./configure --prefix=$install_prefix 
   make
   make shared # <- default just builds the static lib
   make testprog

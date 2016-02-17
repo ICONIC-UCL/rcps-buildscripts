@@ -51,7 +51,7 @@ _setup_files() {
 _build() {
   cd $BUILD_DIR
   cd guile-${PACKAGE_VERSION}
-  ./configure --prefix=$INSTALL_PREFIX --without-threads
+  sh ./configure --prefix=$INSTALL_PREFIX --without-threads
   # had to disable threading because of a kernel bug: see the libbdw-gc build script
   make
   make check

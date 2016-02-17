@@ -37,7 +37,7 @@ _setup_files() {
 
 _build() {
   cd ${basename}
-  ./configure --prefix=$install_prefix ${1:-}
+  sh ./configure --prefix=$install_prefix ${1:-}
   make ${2:-}
   make check 
   make install

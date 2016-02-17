@@ -29,7 +29,7 @@ then
   tar -zxvf $archive
 
   cd ${NAME}-${VERSION}
-  ./configure --prefix=$INSTALL_PREFIX --with-bambamc=yes BAMBAMC_CFLAGS="-I$BAMBAMC_INSTALL_DIR/include" BAMBAMC_LIBS="-L$BAMBAMC_INSTALL_DIR/lib -lbambamc"
+  sh ./configure --prefix=$INSTALL_PREFIX --with-bambamc=yes BAMBAMC_CFLAGS="-I$BAMBAMC_INSTALL_DIR/include" BAMBAMC_LIBS="-L$BAMBAMC_INSTALL_DIR/lib -lbambamc"
 
   make
   make install

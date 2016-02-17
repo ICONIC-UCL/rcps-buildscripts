@@ -38,7 +38,7 @@ _setup_files() {
 
 _build() {
   cd ${basename}
-  ./configure --prefix=$install_prefix ${1:-}
+  sh ./configure --prefix=$install_prefix ${1:-}
   make ${2:-}
   make check  || (echo "Note from build script: test_filter_ipc will probably fail. This looks like a known issue: https://github.com/zeromq/libzmq/issues/1462 ">&2)
   make install

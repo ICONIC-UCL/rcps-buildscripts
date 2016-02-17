@@ -32,7 +32,7 @@ then
   tar -zxvf ${APPNAME}-${VERSION}.tar.gz
 
   cd ${APPNAME}-${VERSION}
-  ./configure --prefix=$INSTALL_PREFIX CFLAGS="-I/shared/ucl/apps/argtable/${ARGTABLEVER}/gnu-4.9.2/include" LDFLAGS="-L/shared/ucl/apps/argtable/${ARGTABLEVER}/gnu-4.9.2/lib"
+  sh ./configure --prefix=$INSTALL_PREFIX CFLAGS="-I/shared/ucl/apps/argtable/${ARGTABLEVER}/gnu-4.9.2/include" LDFLAGS="-L/shared/ucl/apps/argtable/${ARGTABLEVER}/gnu-4.9.2/lib"
   make && make install
 else
   echo "Hash mismatch."

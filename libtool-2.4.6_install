@@ -24,7 +24,7 @@ wget \
 tar -xf libtool-${VERSION}.tar.xz
 
 cd libtool-${VERSION}
-./configure --prefix=$INSTALL_PREFIX
+sh ./configure --prefix=$INSTALL_PREFIX
 make -l 12 -j && make check 
 
 make install

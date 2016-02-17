@@ -56,14 +56,14 @@ then
   patch < CharScanner.patch
   cd ../../..
 
-  ./configure --prefix=${INSTALL_PREFIX}/antlr-${ANTLR_VERSION}
+  sh ./configure --prefix=${INSTALL_PREFIX}/antlr-${ANTLR_VERSION}
   make
   make install
 
   cd ..
   tar zxvf nco-${VERSION}.tar.gz
   cd nco-${VERSION}
-  ./configure --prefix=${INSTALL_PREFIX}/nco-${VERSION}
+  sh ./configure --prefix=${INSTALL_PREFIX}/nco-${VERSION}
   make
   make install
 

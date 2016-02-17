@@ -32,7 +32,7 @@ then
   tar -zxvf ../fftw-${VERSION}.tar.gz
 
   cd fftw-${VERSION}
-  ./configure --prefix=$INSTALL_PREFIX --enable-float --enable-type-prefix
+  sh ./configure --prefix=$INSTALL_PREFIX --enable-float --enable-type-prefix
   make && make install
 
   cd ../..
@@ -43,7 +43,7 @@ then
   tar -zxvf ../fftw-${VERSION}.tar.gz
 
   cd fftw-${VERSION}
-  ./configure --prefix=$INSTALL_PREFIX --enable-type-prefix
+  sh ./configure --prefix=$INSTALL_PREFIX --enable-type-prefix
   make && make install
 
   cd ../..
@@ -54,7 +54,7 @@ then
   tar -zxvf ../fftw-${VERSION}.tar.gz
 
   cd fftw-${VERSION}
-  ./configure --prefix=$INSTALL_PREFIX --enable-float --enable-type-prefix --enable-shared
+  sh ./configure --prefix=$INSTALL_PREFIX --enable-float --enable-type-prefix --enable-shared
   make && make install
 
   cd ../..
@@ -65,7 +65,7 @@ then
   tar -zxvf ../fftw-${VERSION}.tar.gz
 
   cd fftw-${VERSION}
-  ./configure --prefix=$INSTALL_PREFIX --enable-type-prefix --enable-shared
+  sh ./configure --prefix=$INSTALL_PREFIX --enable-type-prefix --enable-shared
   make && make install
 
 else

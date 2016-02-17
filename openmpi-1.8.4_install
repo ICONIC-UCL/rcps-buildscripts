@@ -29,7 +29,7 @@ then
   tar -jxvf openmpi-${VERSION}.tar.bz2
 
   cd openmpi-${VERSION}
-  ./configure --prefix=$INSTALL_PREFIX --with-sge --with-psm=/usr
+  sh ./configure --prefix=$INSTALL_PREFIX --with-sge --with-psm=/usr
   make && make install
 
 # Install mpirun wrapper

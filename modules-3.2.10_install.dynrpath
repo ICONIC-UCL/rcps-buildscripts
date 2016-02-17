@@ -30,7 +30,7 @@ tar -xf tcl${TCL_VERSION}-src.tar.gz
 
 cd tcl${TCL_VERSION}/unix
 
-./configure --prefix=${INSTALL_PREFIX} --enable-64bit 
+sh ./configure --prefix=${INSTALL_PREFIX} --enable-64bit 
 make && make install
 # Unfortunately the build tests for Tcl require threads, which require shared libraries, which disables static library building.
 # C_C
@@ -40,7 +40,7 @@ cd $temp_dir/modules-${VERSION}
 # Removes the default additions to the initial module search path.
 sed --in-place -e 's/^@\([^M]\)/#@\1/' init/.modulespath.in
 
-./configure \
+sh ./configure \
   --prefix=${INSTALL_PREFIX} \
   --with-tcl-inc=${INSTALL_PREFIX}/include \
   --with-tcl-lib=${INSTALL_PREFIX}/lib \

@@ -29,7 +29,7 @@ if [ "$MD5" == "$CHECKSUM" ]
 then
   tar -xvf $archive
   cd ${NAME}_${VERSION}
-  ./configure --prefix=$INSTALL_PREFIX --with-url=$MEME_URL
+  sh ./configure --prefix=$INSTALL_PREFIX --with-url=$MEME_URL
   make 2>&1 | tee make.log
   make test
   make install

@@ -30,7 +30,7 @@ then
   tar -Jxvf Python-${VERSION}.tar.xz
 
   cd Python-${VERSION}
-  ./configure --prefix=$INSTALL_PREFIX \
+  sh ./configure --prefix=$INSTALL_PREFIX \
               --enable-shared \
               --with-threads \
               --enable-ipv6 \

@@ -32,7 +32,7 @@ then
   cd $temp_dir
   tar -xvf $archive
   cd ${NAME}-everywhere-opensource-src-${VERSION}
-  ./configure -prefix $INSTALL_PREFIX -opensource -confirm-license -verbose -L $ALSA_PREFIX/lib 2>&1 | tee config.log
+  sh ./configure -prefix $INSTALL_PREFIX -opensource -confirm-license -verbose -L $ALSA_PREFIX/lib 2>&1 | tee config.log
   gmake -j 4 2>&1 | tee make.log
   gmake install
 

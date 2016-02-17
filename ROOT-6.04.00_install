@@ -28,7 +28,7 @@ if [[ "$MD5" == "$CHECKSUM" ]]
 then
    tar xvzf root_v${VERSION}.source.tar.gz
    cd root-${VERSION}
-   ./configure --prefix=${INSTALL_PREFIX} --etcdir=/shared/ucl/apps/ROOT/6.04.00/gnu-4.9.2/etc \
+   sh ./configure --prefix=${INSTALL_PREFIX} --etcdir=/shared/ucl/apps/ROOT/6.04.00/gnu-4.9.2/etc \
 	    --enable-shared \
 	    --with-fftw3-incdir=$FFTWINCLUDE \
 	    --with-fftw3-libdir=$FFTWLIBDIR

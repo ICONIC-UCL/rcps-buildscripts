@@ -26,7 +26,7 @@ if [[ "$MD5" == "$CHECKSUM" ]]
 then
    tar xvzf gsl-${VERSION}.tar.gz
    cd gsl-${VERSION}
-   ./configure --prefix=${INSTALL_PREFIX}
+   sh ./configure --prefix=${INSTALL_PREFIX}
    make
    make install
 

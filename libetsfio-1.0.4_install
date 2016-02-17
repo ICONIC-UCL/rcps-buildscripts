@@ -47,7 +47,7 @@ _build() {
      if (type == "integer") then
 EOF
 
-  ./configure \
+  sh ./configure \
     --prefix=$install_prefix \
     --with-netcdf-incs=-I/shared/ucl/apps/NetCDF-fortran/4.4.1-intel-2015-update2/include/ \
     --with-netcdf-libs="-lnetcdff"

@@ -97,7 +97,7 @@ fi
 # required for libxcb: install xorg/util/macros
 tar -xvf $xutilmacros_archive
 cd $XUTILMACROS_NAME
-./configure --prefix=$INSTALL_PREFIX/support
+sh ./configure --prefix=$INSTALL_PREFIX/support
 make 2>&1 | tee make.log
 make install
 
@@ -107,7 +107,7 @@ export PKG_CONFIG_PATH=$INSTALL_PREFIX/support/share/pkgconfig:$PKG_CONFIG_PATH
 cd $temp_dir
 tar -xvf $xlibxau_archive
 cd $XLIBXAU_NAME
-./configure --prefix=$INSTALL_PREFIX/support
+sh ./configure --prefix=$INSTALL_PREFIX/support
 make 2>&1 | tee make.log
 make install
 
@@ -117,7 +117,7 @@ export LD_LIBRARY_PATH=$INSTALL_PREFIX/support/lib:$LD_LIBRARY_PATH
 cd $temp_dir
 tar -xvf $pthreadstubs_archive
 cd $PTHREADSTUBS_NAME
-./configure --prefix=$INSTALL_PREFIX/support
+sh ./configure --prefix=$INSTALL_PREFIX/support
 make 2>&1 | tee make.log
 make install
 
@@ -125,7 +125,7 @@ make install
 cd $temp_dir
 tar -xvf $xcbproto_archive
 cd $XCBPROTO_NAME
-./configure --prefix=$INSTALL_PREFIX/support
+sh ./configure --prefix=$INSTALL_PREFIX/support
 make 2>&1 | tee make.log
 make install
 
@@ -136,7 +136,7 @@ export PKG_CONFIG_PATH=$INSTALL_PREFIX/support/lib/pkgconfig:$PKG_CONFIG_PATH
 cd $temp_dir
 tar -xvf $libxcb_archive
 cd $LIBXCB_NAME
-./configure --prefix=$INSTALL_PREFIX/support
+sh ./configure --prefix=$INSTALL_PREFIX/support
 make 2>&1 | tee make.log
 make check
 make install

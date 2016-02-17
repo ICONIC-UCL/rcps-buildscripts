@@ -68,7 +68,7 @@ fi
 # install xorg/util/macros
 tar -xvf $xutilmacros_archive
 cd $XUTILMACROS_NAME
-./configure --prefix=$INSTALL_PREFIX
+sh ./configure --prefix=$INSTALL_PREFIX
 make 2>&1 | tee make.log
 make install
 
@@ -78,7 +78,7 @@ export PKG_CONFIG_PATH=$INSTALL_PREFIX/share/pkgconfig:$PKG_CONFIG_PATH
 cd $temp_dir
 tar -xvf $makedepend_archive
 cd $MAKEDEPEND_NAME
-./configure --prefix=$INSTALL_PREFIX
+sh ./configure --prefix=$INSTALL_PREFIX
 make 2>&1 | tee make.log
 make install
 
@@ -86,7 +86,7 @@ make install
 cd $temp_dir
 tar -xvf $xdmcp_archive
 cd $XDMCP_NAME
-./configure --prefix=$INSTALL_PREFIX
+sh ./configure --prefix=$INSTALL_PREFIX
 make 2>&1 | tee make.log
 make install
 

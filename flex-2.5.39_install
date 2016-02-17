@@ -29,7 +29,7 @@ then
   tar -Jxvf flex-${VERSION}.tar.xz
 
   cd flex-${VERSION}
-  ./configure --prefix=$INSTALL_PREFIX
+  sh ./configure --prefix=$INSTALL_PREFIX
   make && make install 
 
 else

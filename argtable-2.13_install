@@ -32,7 +32,7 @@ then
   tar -zxvf $ARCHIVENAME.tar.gz
 
   cd $ARCHIVENAME
-  ./configure --prefix=$INSTALL_PREFIX
+  sh ./configure --prefix=$INSTALL_PREFIX
   make && make install
 else
   echo "Hash mismatch."
