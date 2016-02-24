@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+###############################################
+# Installing p7zip
+#
+# by Heather Kelly, 2016
+#
+
+NAME=${NAME:-p7zip}
+VERSION=${VERSION:-15.09}
+INSTALL_PREFIX=${INSTALL_PREFIX:-/shared/ucl/apps/$NAME/$VERSION/$COMPILER_TAG}
+SRC_ARCHIVE=${SRC_ARCHIVE:-http://sourceforge.net/projects/$NAME/files/$NAME/$VERSION/${NAME}_${VERSION}_src_all.tar.bz2}
+MD5=${MD5:-ab69f4f13ba0ec57eca2cf4c9edd9678}
+
+set -e
+
+# module prereqs for building
+dirname=$(dirname $0 2>/dev/null)
+INCLUDES_DIR=${INCLUDES_DIR:-${dirname}/includes}
+source ${INCLUDES_DIR}/require_inc.sh
+require gcc-libs/4.9.2
+require compilers/gnu/4.9.2
+
+temp_dir=`mktemp -d -p /dev/shm`
+
+cd $temp_dir
+
+wget $SRC_ARCHIVE
+archive=$(basename "${SRC_ARCHIVE}")
+
+CHECKSUM=`md5sum $archive| awk '{print $1}'`
+
+if [ "$MD5" == "$CHECKSUM" ]
+then
+  tar -xvf $archive
+  cd ${NAME}_${VERSION}
+  cp makefile.linux_any_cpu_gcc_4.X makefile.linux
+  make all_test 2>&1 | tee make.log
+  mkdir -p $INSTALL_PREFIX
+  # set install location
+  sed -i.bak -e "s|DEST_HOME=/usr/local|DEST_HOME=$INSTALL_PREFIX|" install.sh
+  ./install.sh
+
+else
+  echo "Hash mismatch."
+  echo "Expected: $MD5"
+  echo "Got: $CHECKSUM"
+fi

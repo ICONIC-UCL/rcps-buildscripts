@@ -10,7 +10,7 @@ COMPILER_TAG=${COMPILER_TAG:-gnu-4.9.2}
 VERSION=${VERSION:-10Feb15}
 INSTALL_PREFIX=${INSTALL_PREFIX:-/shared/ucl/apps/lammps/$VERSION/$COMPILER_TAG}
 MD5=${MD5:-25a432713a3ad4969fdaaa2551d517ef} 
-SRC_ARCHIVE=${SRC_ARCHIVE:-http://lammps.sandia.gov/tars/lammps-stable.tar.gz}
+SRC_ARCHIVE=${SRC_ARCHIVE:-http://lammps.sandia.gov/tars/lammps-${VERSION}.tar.gz}
 
 set -e
 
@@ -21,27 +21,43 @@ temp_dir=`mktemp -d`
 cd $temp_dir
 
 wget $SRC_ARCHIVE
+archive=$(basename "${SRC_ARCHIVE}")
 
-CHECKSUM=`md5sum lammps-stable.tar.gz| awk '{print $1}'`
+CHECKSUM=`md5sum $archive| awk '{print $1}'`
 
 if [ "$MD5" == "$CHECKSUM" ]
 then
-  tar -zxvf lammps-stable.tar.gz
+  tar -zxvf $archive
 
   cd lammps-${VERSION}/src
-  cp /shared/ucl/apps/build_scripts/lammps-patches/Makefile.legion-${COMPILER_TAG} MAKE/MINE/Makefile.legion
+
+  # Get host machine
+  if hostname -A | grep -q legion
+  then
+    cluster="legion"
+  elif hostname -A | grep -q grace
+  then
+    cluster="grace"
+  else
+    echo "Unknown machine, exiting: $(hostname -A)"
+    exit 1
+  fi
+
+  # Copy in appropriate Makefile with correct architecture flags
+  cp /shared/ucl/apps/build_scripts/lammps-patches/Makefile.$cluster-${COMPILER_TAG} MAKE/MINE/Makefile.$cluster
 
 # Add some necessary packages that aren't included by default for some reason
   make yes-kspace
   make yes-replica
   make yes-rigid
+  make yes-class2
 
 # Make binaries, libraries
-  make legion
+  make $cluster
 
 # Put them outside the source tree
   mkdir ../bin
-  mv lmp_legion ../bin
+  mv lmp_${cluster} ../bin
 
 # Wipe out our old object files.
   make clean-all
@@ -50,6 +66,10 @@ then
   cd ../..
   mkdir -p $INSTALL_PREFIX
   mv lammps-${VERSION} $INSTALL_PREFIX
+
+# Make default binary symlink
+  cd $INSTALL_PREFIX/lammps-${VERSION}/bin
+  ln -s lmp_${cluster} lmp_default
 
 else
   echo "Hash mismatch."

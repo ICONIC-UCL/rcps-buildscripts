@@ -3,16 +3,16 @@
 ###############################################
 # Installing NWChem
 #
-# by Heather Kelly, 2015
+# by Heather Kelly, 2016
 #
 
 NAME=${NAME:-nwchem}
-VERSION=${VERSION:-6.5}
-REVISION=${REVISION:-r26243}
+VERSION=${VERSION:-6.6}
+REVISION=${REVISION:-r27746}
 INSTALL_PREFIX=${INSTALL_PREFIX:-/shared/ucl/apps/$NAME/$VERSION-$REVISION/$COMPILER_TAG}
-MD5=${MD5:-39f4c5974367f47e08328f442833e0f9}
-SRC_ARCHIVE=${SRC_ARCHIVE:-http://www.nwchem-sw.org/images/Nwchem-6.5.revision26243-src.2014-09-10.tar.gz}
-SRC_DIR=${SRC_DIR:-Nwchem-6.5.revision26243-src.2014-09-10}
+MD5=${MD5:-c581001c004ea5e5dfacb783385825e3}
+SRC_ARCHIVE=${SRC_ARCHIVE:-http://www.nwchem-sw.org/download.php?f=Nwchem-6.6.revision27746-src.2015-10-20.tar.gz}
+SRC_DIR=${SRC_DIR:-nwchem-6.6}
 
 FL=${FL:-ifort}
 # stop it using -xhost. SSE4.1 for Nehalem. This doesn't actually work, need to build on older host.
@@ -26,6 +26,7 @@ LARGE_FILES=${LARGE_FILES:-TRUE}
 # NOIO recommended on clusters
 USE_NOIO=${USE_NOIO:-TRUE}
 
+USE_OPENMP=${USE_OPENMP:-y}
 USE_MPI=${USE_MPI:-y}
 USE_MPIF=${USE_MPIF:-y}
 USE_MPIF4=${USE_MPIF4:-y}
@@ -81,10 +82,6 @@ then
 
   tar -xvf $archive
 
-  # strip off the extraneous bits around the directory name
-  #dirname=${archive#download.php?f=}
-  #dirname=${dirname%.tar.gz}
-
   export FL
   export FOPTIMIZE
   export COPTIMIZE
@@ -95,6 +92,7 @@ then
   export NWCHEM_LONG_PATHS
   export LARGE_FILES
 
+  export USE_OPENMP
   export USE_MPI
   export USE_MPIF
   export USE_MPIF4
@@ -122,6 +120,28 @@ then
   export USE_SCALAPACK
   export SCALAPACK_SIZE
   export SCALAPACK
+
+  # apply patches
+  cd $NWCHEM_TOP
+  wget http://www.nwchem-sw.org/images/Tddft_mxvec20.patch.gz
+  gzip -d Tddft_mxvec20.patch.gz
+  patch -p0 < Tddft_mxvec20.patch
+
+  wget -O Config_libs66.patch.gz http://www.nwchem-sw.org/download.php?f=Config_libs66.patch.gz
+  gzip -d Config_libs66.patch.gz
+  patch -p0 < Config_libs66.patch
+
+  wget -O Cosmo_meminit.patch.gz http://www.nwchem-sw.org/download.php?f=Cosmo_meminit.patch.gz
+  gzip -d Cosmo_meminit.patch.gz
+  patch -p0 < Cosmo_meminit.patch
+
+  wget -O Sym_abelian.patch.gz http://www.nwchem-sw.org/download.php?f=Sym_abelian.patch.gz
+  gzip -d Sym_abelian.patch.gz
+  patch -p0 < Sym_abelian.patch
+
+  wget -O Xccvs98.patch.gz http://www.nwchem-sw.org/download.php?f=Xccvs98.patch.gz
+  gzip -d Xccvs98.patch.gz
+  patch -p0 < Xccvs98.patch
 
   # make nwchem
   cd $NWCHEM_TOP/src
