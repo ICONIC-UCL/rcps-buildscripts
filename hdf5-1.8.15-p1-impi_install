@@ -46,7 +46,7 @@ _build() {
   cd $BUILD_DIR
   cd ${BASENAME}
   CC=mpicc FC=mpif90                 \
-    ./configure                      \
+    sh ./configure                      \
       --prefix=$INSTALL_PREFIX  \
       --enable-parallel              \
       --enable-shared                \

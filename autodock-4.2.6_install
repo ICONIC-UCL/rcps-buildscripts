@@ -27,14 +27,14 @@ if [ "$MD5" == "$CHECKSUM" ]
 then
   tar -xvf $archive
   cd src/autodock
-  ./configure --prefix=$INSTALL_PREFIX
+  sh ./configure --prefix=$INSTALL_PREFIX
   make 2>&1 | tee make.log
   make check
   make install
 
   # autogrid
   cd ../autogrid
-  ./configure --prefix=$INSTALL_PREFIX
+  sh ./configure --prefix=$INSTALL_PREFIX
   make 2>&1 | tee make.log
   make check
   make install

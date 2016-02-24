@@ -62,7 +62,7 @@ _build() {
   export CPP="mpicc -E"
   export MPIEXEC=`which mpirun`
   find . -name "*.?90" | xargs -Ifile sed -i.old -e 's/^ *#/#/' file
-  ./configure --prefix=$install_prefix --with-etsf-io-prefix=/shared/ucl/apps/libetsfio/1.0.4/intel-2015-update2/ --with-netcdf-prefix="/shared/ucl/apps/NetCDF/4.3.3.1-Intel_2015/" --with-sparskit=/shared/ucl/apps/sparskit2/2009.11.18/intel-2015-update2/lib/libskit.a --with-etsf-io-include=/shared/ucl/apps/libetsfio/1.0.4/intel-2015-update2/include --enable-utils --enable-mpi  ${1:-} 
+  sh ./configure --prefix=$install_prefix --with-etsf-io-prefix=/shared/ucl/apps/libetsfio/1.0.4/intel-2015-update2/ --with-netcdf-prefix="/shared/ucl/apps/NetCDF/4.3.3.1-Intel_2015/" --with-sparskit=/shared/ucl/apps/sparskit2/2009.11.18/intel-2015-update2/lib/libskit.a --with-etsf-io-include=/shared/ucl/apps/libetsfio/1.0.4/intel-2015-update2/include --enable-utils --enable-mpi  ${1:-} 
   make ${2:-}
   ulimit -s unlimited # <-- if you don't do this, the first test segfaults
   make check 

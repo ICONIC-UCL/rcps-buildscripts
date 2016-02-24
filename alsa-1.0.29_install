@@ -29,7 +29,7 @@ then
   cd $temp_dir
   tar -xvf $archive
   cd ${NAME}-lib-${VERSION}
-  ./configure --prefix=$INSTALL_PREFIX 
+  sh ./configure --prefix=$INSTALL_PREFIX 
   make install 2>&1 | tee make.log
 
 else

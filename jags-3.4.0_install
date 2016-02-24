@@ -38,7 +38,7 @@ if [[ "$MD5" == "$CHECKSUM" ]]
 then
    tar xvzf JAGS-${VERSION}.tar.gz
    cd JAGS-${VERSION}
-   ./configure --prefix=$INSTALL_PREFIX \
+   sh ./configure --prefix=$INSTALL_PREFIX \
            --with-blas="-lopenblas" \
            --with-lapack="-lopenblas"
    make

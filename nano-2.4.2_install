@@ -27,7 +27,7 @@ if [ "$MD5" == "$CHECKSUM" ]
 then
   tar -xvf $archive
   cd ${NAME}-${VERSION}
-  ./configure --prefix=$INSTALL_PREFIX
+  sh ./configure --prefix=$INSTALL_PREFIX
   make 2>&1 | tee make.log
   make install
 

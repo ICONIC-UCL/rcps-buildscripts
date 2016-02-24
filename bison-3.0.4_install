@@ -28,7 +28,7 @@ then
   tar -xvf $archive
 
   cd ${NAME}-${VERSION}
-  ./configure --prefix=$INSTALL_PREFIX
+  sh ./configure --prefix=$INSTALL_PREFIX
   make
   make install
 

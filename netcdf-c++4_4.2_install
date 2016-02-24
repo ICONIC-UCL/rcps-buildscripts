@@ -33,7 +33,7 @@ then
    export CPPFLAGS="-I/shared/ucl/apps/NetCDF/4.3.3.1-${COMPILER_TAG}/include"
    export LDFLAGS="-L/shared/ucl/apps/NetCDF/4.3.3.1-${COMPILER_TAG}/lib"
 
-   ./configure --prefix=${INSTALL_PREFIX} 
+   sh ./configure --prefix=${INSTALL_PREFIX} 
    make
    make install
 

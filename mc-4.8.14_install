@@ -31,7 +31,7 @@ then
   tar -jxvf ${APPNAME}-${VERSION}.tar.bz2
 
   cd ${APPNAME}-${VERSION}
-  ./configure --prefix=$INSTALL_PREFIX --with-screen=ncurses
+  sh ./configure --prefix=$INSTALL_PREFIX --with-screen=ncurses
   make && make install
 else
   echo "Hash mismatch."

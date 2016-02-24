@@ -45,7 +45,7 @@ then
      
    fi 
 
-   ./configure --prefix=${INSTALL_PREFIX} 
+   sh ./configure --prefix=${INSTALL_PREFIX} 
    make
    make install
 

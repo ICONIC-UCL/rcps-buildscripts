@@ -30,13 +30,13 @@ tar -xf Lmod-${VERSION}.tar.bz2
 tar -xf lua-5.1.4.8.tar.gz
 
 cd lua-5.1.4.8
-./configure --prefix=$INSTALL_PREFIX
+sh ./configure --prefix=$INSTALL_PREFIX
 make -l 12 -j && make install
 
 cd ..
 
 cd Lmod-${VERSION}
-./configure \
+sh ./configure \
   --prefix=${INSTALL_PREFIX} \
   --with-spiderCacheDir=${INSTALL_PREFIX}/spidercache \
   --with-updateSystemFn=${INSTALL_PREFIX}/spidercache.updb.txt \

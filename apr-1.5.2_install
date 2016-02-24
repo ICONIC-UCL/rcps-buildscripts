@@ -29,7 +29,7 @@ then
   tar -jxvf apr-${VERSION}.tar.bz2
 
   cd apr-${VERSION}
-  ./configure --prefix=$INSTALL_PREFIX
+  sh ./configure --prefix=$INSTALL_PREFIX
   make && make install
 else
   echo "Hash mismatch."

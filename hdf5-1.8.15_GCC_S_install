@@ -28,7 +28,7 @@ if [[ "$MD5" == "$CHECKSUM" ]]
 then
    tar xvzf hdf${VERSION}.tar.gz
    cd hdf${VERSION}
-   ./configure --prefix=${INSTALL_PREFIX} --enable-threadsafe  
+   sh ./configure --prefix=${INSTALL_PREFIX} --enable-threadsafe  
    make
    make check-s
    make install

@@ -33,7 +33,7 @@ then
 
   cd ${NAME}-${VERSION}-release-${RELEASE}
   autoreconf -i -f
-  ./configure --prefix=$INSTALL_PREFIX
+  sh ./configure --prefix=$INSTALL_PREFIX
   make
   make install
 

@@ -48,7 +48,7 @@ _setup_files() {
 _build() {
   cd $BUILD_DIR
   cd gc-${PACKAGE_VERSION}
-  ./configure --prefix=$INSTALL_PREFIX --disable-threads #--enable-threads=pthreads
+  sh ./configure --prefix=$INSTALL_PREFIX --disable-threads #--enable-threads=pthreads
   #  ^-- on some kernels, the `make check` tests with threading reliably hit a bug where futexes get
   #       permanently locked. I'm not sure whether this would happen in use but I
   #       figured it would be annoying enough for us to not want it to happen

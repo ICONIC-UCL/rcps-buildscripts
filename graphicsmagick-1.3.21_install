@@ -31,7 +31,7 @@ then
   tar -Jxvf GraphicsMagick-${VERSION}.tar.xz
 
   cd GraphicsMagick-${VERSION}
-  ./configure --prefix=$INSTALL_PREFIX --enable-shared --with-modules --with-perl
+  sh ./configure --prefix=$INSTALL_PREFIX --enable-shared --with-modules --with-perl
   make && make install
 else
   echo "Hash mismatch."

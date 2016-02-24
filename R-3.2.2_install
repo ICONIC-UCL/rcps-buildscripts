@@ -58,7 +58,7 @@ if [[ "$MD5" == "$CHECKSUM" ]]
 then
    tar xvzf R-${VERSION}.tar.gz
    cd R-${VERSION}
-   ./configure -C --prefix=${INSTALL_PREFIX} --with-recommended-packages --with-x \
+   sh ./configure -C --prefix=${INSTALL_PREFIX} --with-recommended-packages --with-x \
       --with-readline=yes --enable-R-shlib \
       --with-blas="-L/shared/ucl/apps/openblas/0.2.14/gnu-4.9.2/lib -lopenblas" \
       --enable-BLAS-shlib 2>&1 | 

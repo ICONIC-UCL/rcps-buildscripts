@@ -39,7 +39,7 @@ then
    export CPPFLAGS=-I/shared/ucl/apps/HDF/5-1.8.15-${HDF_TAG}/include
    export LDFLAGS=-L/shared/ucl/apps/HDF/5-1.8.15-${HDF_TAG}/lib
 
-   ./configure --prefix=${INSTALL_PREFIX} ${NETCDF_OPTIONS}
+   sh ./configure --prefix=${INSTALL_PREFIX} ${NETCDF_OPTIONS}
    make
    make check
    make install

@@ -28,7 +28,7 @@ cd $temp_dir
 tar zxvf $SRC_ARCHIVE
 cd Molpro
 
-./configure -gcc -gfortran -mpp -mppbase $MPI_HOME/include -prefix $INSTALL_PREFIX -var LAUNCHER=$MPI_WRAPPER -openmpi -batch -i8
+sh ./configure -gcc -gfortran -mpp -mppbase $MPI_HOME/include -prefix $INSTALL_PREFIX -var LAUNCHER=$MPI_WRAPPER -openmpi -batch -i8
 
 
 make

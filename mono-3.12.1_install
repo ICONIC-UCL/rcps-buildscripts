@@ -32,7 +32,7 @@ if [[ "$MD5" == "$CHECKSUM" && "$LIBGDIPLUS_MD5" == "$LIBGDIPLUSCHECKSUM" ]]
 then
    tar -jxvf mono-${VERSION}.tar.bz2
    cd mono-${VERSION}
-   ./configure --prefix=${INSTALL_PREFIX}
+   sh ./configure --prefix=${INSTALL_PREFIX}
    make
    make install
 
@@ -40,7 +40,7 @@ then
 
    tar -zxvf libgdiplus-${LIBGDIPLUS_VERSION}.tar.gz
    cd libgdiplus-${LIBGDIPLUS_VERSION}
-   ./configure --prefix=${INSTALL_PREFIX}
+   sh ./configure --prefix=${INSTALL_PREFIX}
    make
    make install
    

@@ -29,7 +29,7 @@ if [ "$MD5" == "$CHECKSUM" ]
 then
   tar -xvf $archive
   cd ${NAME}-${VERSION}
-  ./configure --prefix=$INSTALL_PREFIX CFLAGS=-march=${MARCH} CXXFLAGS=-march=${MARCH} ${OPTIONS}
+  sh ./configure --prefix=$INSTALL_PREFIX CFLAGS=-march=${MARCH} CXXFLAGS=-march=${MARCH} ${OPTIONS}
   make 2>&1 | tee make.log
   make install
 
