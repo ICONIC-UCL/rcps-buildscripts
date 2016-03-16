@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+###############################################
+# Installing gcc 4.9.2
+#
+# by Robert Sugar 2016
+# based on Owain Kenway's install template (2015)
+#
+
+
+VERSION=${VERSION:-4.9.2}
+INSTALL_PREFIX=${INSTALL_PREFIX:-/shared/ucl/apps/gcc/$VERSION}
+MD5=${MD5:-76f464e0511c26c93425a9dcdc9134cf}
+ARCHIVENAME=${ARCHIVENAME:-gcc-${VERSION}.tar.gz}
+SRC_ARCHIVE=${SRC_ARCHIVE:-ftp://ftp.mirrorservice.org/sites/sourceware.org/pub/gcc/releases/gcc-${VERSION}/${ARCHIVENAME}}
+EXTDIR=${EXTDIR:-gcc-${VERSION}}
+
+set -e
+
+export PATH=$INSTALL_PREFIX/bin:$PATH
+
+mkdir -p /dev/shm/gcc
+temp_dir=`mktemp -d -p /dev/shm/gcc`
+
+pushd $temp_dir
+
+wget $SRC_ARCHIVE
+
+CHECKSUM=`md5sum ${ARCHIVENAME}| awk '{print $1}'`
+
+if [ "$MD5" == "$CHECKSUM" ]
+then
+  tar -xzvf ${ARCHIVENAME}
+  cd $EXTDIR 
+  ./configure --disable-multilib --prefix=${INSTALL_PREFIX}
+  make -j 72
+  make install
+  make clean
+
+else
+  echo "Hash mismatch."
+  echo "Expected: $MD5"
+  echo "Got: $CHECKSUM"
+fi
