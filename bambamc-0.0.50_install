@@ -16,7 +16,7 @@ SRC_ARCHIVE=${SRC_ARCHIVE:-https://github.com/gt1/${NAME}/archive/${VERSION}-rel
 set -e
 
 # libtool must be available
-hash libtool 2>/dev/null || echo $PATH | grep -q libtool || { echo >&2 "bambamc needs libtool to be loaded. Aborting. \n PATH:$PATH"; exit 1; }
+hash libtool 2>/dev/null || echo $PATH | grep -q libtool || { echo >&2 "bambamc needs libtool to be loaded. Aborting."; exit 1; }
 
 temp_dir=`mktemp -d -p /dev/shm`
 
