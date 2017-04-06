@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+###############################################
+# Installing FastQC
+#
+# by Tiziano Gallo Cassarino, 2015
+#
+
+NAME=${NAME:-sambamba}
+VERSION=${VERSION:-0.6.6}
+INSTALL_PREFIX=${INSTALL_PREFIX:-/shared/ucl/apps/$NAME/$VERSION}
+MD5=${MD5:-6fc3b70ac32441f3a9c6aa87743c8e3c}
+SRC_ARCHIVE=${SRC_ARCHIVE:-https://github.com/lomereiter/${NAME}/releases/download/v0.6.6/${NAME}_v${VERSION}_linux.tar.bz2}
+
+set -e
+
+temp_dir=`mktemp -d -p /dev/shm`
+
+pushd $temp_dir
+
+wget $SRC_ARCHIVE
+archive=$(basename "${SRC_ARCHIVE}")
+
+CHECKSUM=`md5sum $archive| awk '{print $1}'`
+
+if [ "$MD5" == "$CHECKSUM" ]
+then
+
+  mkdir -p $INSTALL_PREFIX
+  tar -xjf $archive
+  cp -r ${NAME}_v${VERSION} $INSTALL_PREFIX/${NAME}
+  
+  chmod a+x $INSTALL_PREFIX/${NAME}
+
+else
+  echo "Hash mismatch."
+  echo "Expected: $MD5"
+  echo "Got: $CHECKSUM"
+fi
+
+popd
+
+rm -rf $temp_dir
+
